@@ -1,0 +1,28 @@
+{% extends "template.html" %}
+{% block content %}
+    <h1>Tim's Diner Menu</h1>
+    <div class="overflow-x-scroll">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Icon</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in items %}
+                <tr>
+                    <th>{{ item.id }}</th>
+                    <th class="font-size-24">{{ item.icon }}</th>
+                    <td>{{ item.name }}</td>
+                    <td>{{ categories[item.category].name }}</td>
+                    <td>£{{ item.price }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

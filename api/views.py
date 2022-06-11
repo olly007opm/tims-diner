@@ -26,7 +26,7 @@ def home():
         return render_template("index.html", current_user=current_user, page="home", orders=orders, items=items,
                                tables=tables, total=total)
     else:
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('views.menu'))
 
 
 # Example page
@@ -96,12 +96,27 @@ def deletetable(tableid):
 
 
 # Menu page
-@login_required
 @views.route('/menu')
 def menu():
     items = Item.query.all()
-    categories = Category.query.all()
-    return render_template("item/items.html", current_user=current_user, page="menu", items=items,
+    categories_raw = Category.query.all()
+    categories = {}
+    for category_raw in categories_raw:
+        categories[category_raw.id] = category_raw
+    return render_template("item/menu.html", current_user=current_user, page="menu", items=items,
+                           categories=categories)
+
+
+# Staff Menu page
+@login_required
+@views.route('/menuitems')
+def menuitems():
+    items = Item.query.all()
+    categories_raw = Category.query.all()
+    categories = {}
+    for category_raw in categories_raw:
+        categories[category_raw.id] = category_raw
+    return render_template("item/items.html", current_user=current_user, page="menuitems", items=items,
                            categories=categories)
 
 
@@ -120,7 +135,7 @@ def additem():
         db.session.add(new_item)
         db.session.commit()
         flash('Item created successfully.', category='success')
-        return redirect(url_for('views.menu'))
+        return redirect(url_for('views.menuitems'))
 
     return render_template("item/additem.html", current_user=current_user, page="additem", categories=categories)
 
@@ -148,7 +163,7 @@ def edititem(itemid):
         db.session.add(item)
         db.session.commit()
         flash('Item updated successfully.', category='success')
-        return redirect(url_for('views.menu'))
+        return redirect(url_for('views.menuitems'))
 
     return render_template("item/edititem.html", current_user=current_user, page="edititem", item=item,
                            categories=categories)
@@ -165,7 +180,7 @@ def deleteitem(itemid):
     db.session.delete(item)
     db.session.commit()
     flash('Item deleted successfully.', category='success')
-    return redirect(url_for('views.menu'))
+    return redirect(url_for('views.menuitems'))
 
 
 # Category page
