@@ -1,0 +1,50 @@
+{% extends "template.html" %}
+{% block content %}
+    <h1>Categories</h1>
+
+    {% for category in categories %}
+        <div class="modal" id="delete-modal-{{ category.id }}" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <h5 class="modal-title">Confirm delete</h5>
+                    <p>
+                        Are you sure you want to delete category <strong>{{ category.id }}</strong>?
+                    </p>
+                    <div class="text-right mt-20">
+                    <a href="#" class="btn mr-5" role="button">Cancel</a>
+                    <a href="/deletecategory/{{ category.id }}" class="btn btn-danger" role="button">
+                        <i class="fa-solid fa-trash mr-5"></i> Delete category
+                    </a>
+                </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="overflow-x-scroll">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for category in categories %}
+                <tr>
+                    <th>{{ category.id }}</th>
+                    <td>{{ category.name }}</td>
+                    <td>
+                        <a role="button" class="btn btn-secondary" href="/editcategory/{{ category.id }}">
+                            <i class="fa-solid fa-pen mr-5"></i> Edit category
+                        </a>
+                        <a role="button" class="btn btn-danger mt-5 mt-md-0" href="#delete-modal-{{ category.id }}">
+                            <i class="fa-solid fa-trash mr-5"></i> Delete category
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

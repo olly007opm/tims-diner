@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta tags -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Address bar theming -->
+    <meta name="theme-color" content="#111417">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#111417">
+
+    <!-- Fav and Title -->
+    <title>Tim's Diner</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <!-- Halfmoon styles -->
+    <link href="{{ url_for('static', filename='css/halfmoon-variables.css') }}" rel="stylesheet" />
+    <!-- Font awesome -->
+    <link href="{{ url_for('static', filename='fontawesome/css/all.css') }}" rel="stylesheet">
+    <!-- Custom styles -->
+    <link href="{{ url_for('static', filename='error/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+</head>
+
+<body class="dark-mode" data-dm-shortcut-enabled="true">
+
+    <!-- Page wrapper start -->
+    <div id="page-wrapper" class="page-wrapper with-navbar with-navbar-fixed-bottom">
+
+        <!-- Navbar start -->
+        <nav class="navbar">
+            <a href="/" class="navbar-brand ml-10 ml-sm-20">
+                <i class="fa-solid fa-utensils"></i>
+                <span class="ml-10">Tim's Diner</span>
+            </a>
+            <div class="navbar-content ml-auto print-none">
+                <button class="btn btn-action" type="button" onclick="halfmoon.toggleDarkMode()">
+                    <i class="fa-solid fa-moon"></i>
+                    <span class="sr-only">Toggle dark mode</span>
+                </button>
+            </div>
+        </nav>
+        <!-- Navbar end -->
+
+        <!-- Content wrapper start -->
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                <div class="content">
+                    <div class="print-header">
+                        <h1>Order {{ order.id }}</h1>
+                        <h1>Table {{ order.table }}</h1>
+                    </div>
+
+                    <div class="overflow-x-scroll">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Icon</th>
+                                    <th>Name</th>
+                                    <th>Individual Price</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in order.items %}
+                                <tr>
+                                    <th>{{ item }}</th>
+                                    <th class="font-size-24">{{ items[item].icon }}</th>
+                                    <td>{{ items[item].name }}</td>
+                                    <td>£{{ items[item].price }}</td>
+                                    <td>{{ order.items[item] }}</td>
+                                    <td>£{{ items[item].price * order.items[item] }}</td>
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>Total</th>
+                                <th>£{{ order.total }}</th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <button class="btn btn-primary print-none" onclick="window.close()">
+                        <i class="fa-solid fa-arrow-left"></i> Back
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Content wrapper end -->
+
+        <!-- Navbar fixed bottom start -->
+        <nav class="navbar navbar-fixed-bottom">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="https://olly.ml/" target="_blank" class="nav-link">
+                        &copy; Copyright Olly 2022
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- Navbar fixed bottom end -->
+
+    </div>
+    <!-- Page wrapper end -->
+
+    <!-- Halfmoon JS -->
+    <script src="{{ url_for('static', filename='js/halfmoon.js') }}"></script>
+    <script>
+        window.print()
+    </script>
+</body>
+
+</html>

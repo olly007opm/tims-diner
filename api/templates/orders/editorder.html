@@ -1,0 +1,72 @@
+{% extends "template.html" %}
+{% block content %}
+    <h1>Edit Order</h1>
+    <form method="POST" class="w-400 mw-full">
+        <div class="form-group">
+            <label for="table" class="required">Table</label>
+            <select class="form-control" id="table" name="table">
+                {% for table in tables %}
+                    {% if table.id == order.table %}
+                        <option value="{{ table.id }}" name="table" selected>{{ table.id }}</option>
+                    {% else %}
+                        <option value="{{ table.id }}" name="table">{{ table.id }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        {% for category in categories %}
+            <details class="collapse-panel">
+                <summary class="collapse-header">
+                    {{ category.id }} - {{ category.name }}
+                </summary>
+                <div class="collapse-content p-0">
+                    <div class="overflow-x-scroll">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Icon</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in items %}
+                    {% if item.category == category.id %}
+                    <tr>
+                        <th>{{ item.id }}</th>
+                        <th class="font-size-24">{{ item.icon }}</th>
+                        <td>{{ item.name }}</td>
+                        <td>£{{ item.price }}</td>
+                        <td>
+                            <div class="input-group">
+                                <input type="number" class="form-control form-number" id="item-{{ item.id }}"
+                                       name="item-{{ item.id }}" step="1" value="{{ order.items[item.id] or 0 }}" required min="0">
+                                <div class="input-group-append">
+                                    <button type="button" class="btn px-0 w-25" data-trigger="number-step-down"
+                                            data-target="item-{{ item.id }}">-</button>
+                                </div>
+                                <div class="input-group-append">
+                                    <button type="button" class="btn px-0 w-25" data-trigger="number-step-up"
+                                            data-target="item-{{ item.id }}">+</button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+                </div>
+            </details>
+
+
+        {% endfor %}
+
+        <button class="btn btn-primary" type="submit">
+            <i class="fa-solid fa-pen"></i> Edit Order
+        </button>
+    </form>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "template.html" %}
+{% block content %}
+    <h1>Add Category</h1>
+    <form method="POST" class="w-400 mw-full">
+        <div class="form-group">
+            <label for="name" class="required">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Name" required="required">
+        </div>
+
+        <button class="btn btn-primary" type="submit">
+            <i class="fa-solid fa-plus"></i> Add Category
+        </button>
+    </form>
+{% endblock %}

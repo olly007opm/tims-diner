@@ -1,0 +1,19 @@
+{% extends "template.html" %}
+{% block content %}
+    <h1>Edit Category</h1>
+    <form method="POST" class="w-400 mw-full">
+        <div class="form-group">
+            <label for="id" class="required">ID</label>
+            <input type="number" class="form-control" id="id" name="id" value="{{ category.id }}" required="required" disabled>
+        </div>
+
+        <div class="form-group">
+            <label for="name" class="required">Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ category.name }}" required="required">
+        </div>
+
+        <button class="btn btn-secondary" type="submit">
+            <i class="fa-solid fa-pen"></i> Edit Category
+        </button>
+    </form>
+{% endblock %}

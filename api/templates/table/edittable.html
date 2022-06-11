@@ -1,0 +1,27 @@
+{% extends "template.html" %}
+{% block content %}
+    <h1>Edit Table</h1>
+    <form method="POST" class="w-400 mw-full">
+        <div class="form-group">
+            <label for="id" class="required">ID</label>
+            <input type="number" class="form-control" id="id" name="id" value="{{ table.id }}" required="required" disabled>
+        </div>
+
+        <div class="form-group">
+            <label for="seats" class="required">Seats</label>
+            <div class="input-group">
+                <input type="number" class="form-control form-number" id="seats" name="seats" step="1" value="{{ table.seats }}" min="1" required>
+                <div class="input-group-append">
+                    <button type="button" class="btn px-0 w-25" data-trigger="number-step-down" data-target="seats">-</button>
+                </div>
+                <div class="input-group-append">
+                    <button type="button" class="btn px-0 w-25" data-trigger="number-step-up" data-target="seats">+</button>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-secondary" type="submit">
+            <i class="fa-solid fa-pen"></i> Edit Table
+        </button>
+    </form>
+{% endblock %}
