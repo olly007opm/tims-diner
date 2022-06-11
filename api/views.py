@@ -246,11 +246,15 @@ def deletecategory(categoryid):
 @login_required
 @views.route('/orders')
 def orders():
+    orders = Order.query.all()
     items = {}
     for item in Item.query.all():
         items[item.id] = item
-    return render_template("orders/orders.html", current_user=current_user, page="orders", orders=Order.query.all(),
-                           items=items, categories=Category.query.all())
+    total = 0
+    for order in orders:
+        total += order.total
+    return render_template("orders/orders.html", current_user=current_user, page="orders", orders=orders,
+                           items=items, categories=Category.query.all(), total=total)
 
 
 # Add order page
