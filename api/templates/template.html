@@ -95,9 +95,9 @@
                 <br/>
                 <h5 class="sidebar-title">Menu Items</h5>
                 <div class="sidebar-divider"></div>
-                <a href="/menu" class="sidebar-link sidebar-link-with-icon {{ 'active' if page == "menu" }}">
+                <a href="/menuitems" class="sidebar-link sidebar-link-with-icon {{ 'active' if page == "menuitems" }}">
                     <span class="sidebar-icon"><i class="fa-solid fa-burger"></i></span>
-                    Menu
+                    Menu Items
                 </a>
                 <a href="/additem" class="sidebar-link sidebar-link-with-icon {{ 'active' if page == "additem" }}">
                     <span class="sidebar-icon"><i class="fa-solid fa-plus"></i></span>
@@ -126,6 +126,10 @@
                 </a>
                 {% endif %}
             {% else %}
+                <a href="/menu" class="sidebar-link sidebar-link-with-icon {{ 'active' if page == "menu" }}">
+                    <span class="sidebar-icon"><i class="fa-solid fa-burger"></i></span>
+                    Menu
+                </a>
                 <a href="/login" class="sidebar-link sidebar-link-with-icon {{ 'active' if page == "login" }}">
                     <span class="sidebar-icon"><i class="fa-solid fa-key"></i></span>
                     Login
