@@ -33,7 +33,7 @@
             </thead>
             <tbody>
             {% for order in orders %}
-                <tr>
+                <tr id="order-{{ order.id }}" tabindex="0">
                     <th>{{ order.id }}</th>
                     <td>{{ order.table }}</td>
                     <td>
