@@ -10,7 +10,21 @@ views = Blueprint('views', __name__)
 @views.route('/')
 def home():
     if current_user.is_authenticated:
-        return render_template("index.html", current_user=current_user, page="home")
+        orders = Order.query.all()
+        tables = Table.query.all()
+        orders.reverse()
+
+        items_raw = Item.query.all()
+        items = {}
+        for item_raw in items_raw:
+            items[item_raw.id] = item_raw
+
+        total = 0
+        for order in orders:
+            total += order.total
+
+        return render_template("index.html", current_user=current_user, page="home", orders=orders, items=items,
+                               tables=tables, total=total)
     else:
         return redirect(url_for('auth.login'))
 
