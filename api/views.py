@@ -277,6 +277,7 @@ def neworder():
         new_order = Order(table=table, items=order_items, total=calculate_total(order_items))
         db.session.add(new_order)
         db.session.commit()
+        update_orders()
         flash('Order created successfully.', category='success')
         return redirect(url_for('views.orders'))
 
@@ -311,6 +312,7 @@ def editorder(orderid):
         order.total = calculate_total(order_items)
         db.session.add(order)
         db.session.commit()
+        update_orders()
         flash('Order updated successfully.', category='success')
         return redirect(url_for('views.orders'))
 
@@ -328,6 +330,7 @@ def deleteorder(orderid):
         return redirect(url_for('views.orders'))
     db.session.delete(order)
     db.session.commit()
+    update_orders()
     flash('Order deleted successfully.', category='success')
     return redirect(url_for('views.orders'))
 
@@ -356,6 +359,27 @@ def calculate_total(order_items):
         price = Item.query.filter_by(id=id).first().price
         total += price * quantity
     return total
+
+
+def update_orders():
+    items = Item.query.all()
+    orders = Order.query.all()
+    totals = {}
+    for item in items:
+        totals[item.id] = 0
+    for order in orders:
+        order_items = order.items
+        for item in items:
+            id = item.id
+            if id in order_items:
+                quantity = order_items[id]
+            else:
+                quantity = 0
+            totals[id] += quantity
+    for item in items:
+        item.orders = totals[item.id]
+        db.session.add(item)
+    db.session.commit()
 
 
 # ──────────────────────────────────────── CODE SNIPPETS ────────────────────────────────────────
