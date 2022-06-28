@@ -347,7 +347,8 @@ CSS variables (CSS custom properties)
     --blue-color-base-hue: 209;
     --blue-color-base-saturation: 100%;
 
-    --blue-color-hsl: var(--blue-color-base-hue), var(--blue-color-base-saturation), 55%;
+    /*--blue-color-hsl: var(--blue-color-base-hue), var(--blue-color-base-saturation), 55%;*/
+    --blue-color-hsl: var(--blue-color-base-hue), var(--blue-color-base-saturation), 40%;
     --blue-color-light-hsl: var(--blue-color-base-hue), var(--blue-color-base-saturation), 65%;
     --blue-color-very-light-hsl: var(--blue-color-base-hue), var(--blue-color-base-saturation), 92.5%;
     --blue-color-dim-hsl: var(--blue-color-base-hue), var(--blue-color-base-saturation), 45%;
