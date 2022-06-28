@@ -29,16 +29,16 @@
 <body class="dark-mode" data-dm-shortcut-enabled="true" data-sidebar-shortcut-enabled="true">
 
     <!-- Page wrapper start -->
-    <div id="page-wrapper" class="page-wrapper with-navbar with-sidebar with-navbar-fixed-bottom" data-sidebar-type="overlayed-sm-and-down">
+    <div id="page-wrapper" class="page-wrapper with-navbar with-sidebar" data-sidebar-type="overlayed-sm-and-down">
 
         <!-- Navbar start -->
         <nav class="navbar">
             <div class="navbar-content">
-                <button id="toggle-sidebar-btn" class="btn btn-action" type="button" onclick="halfmoon.toggleSidebar()">
+                <button id="toggle-sidebar-btn" class="btn btn-action" type="button" onclick="halfmoon.toggleSidebar()" aria-label="Toggle sidebar button">
                     <i class="fa fa-bars"></i>
                 </button>
             </div>
-            <a href="/" class="navbar-brand ml-10 ml-sm-20">
+            <a href="/" class="navbar-brand ml-10 ml-sm-20" aria-label="Navbar brand with link to home page">
                 <i class="fa-solid fa-utensils"></i>
                 <span class="d-none d-md-block ml-10">Tim's Diner</span>
             </a>
@@ -142,7 +142,7 @@
 
         <!-- Content wrapper start -->
         <div class="content-wrapper">
-            <div class="container-fluid">
+            <div class="container-fluid" style="min-height: calc(100vh - (2.6 * var(--navbar-height)));">
                 <div class="content">
                     <div class="alert-container">
                         {% with messages = get_flashed_messages(with_categories=true) %}
@@ -161,20 +161,20 @@
                     {% block content %}{% endblock %}
                 </div>
             </div>
+
+            <!-- Navbar static bottom start -->
+            <nav class="navbar navbar-static-bottom">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="https://olly.ml/" target="_blank" class="nav-link">
+                            &copy; Copyright Olly 2022
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- Navbar static bottom end -->
         </div>
         <!-- Content wrapper end -->
-
-        <!-- Navbar fixed bottom start -->
-        <nav class="navbar navbar-fixed-bottom">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a href="https://olly.ml/" target="_blank" class="nav-link">
-                        &copy; Copyright Olly 2022
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!-- Navbar fixed bottom end -->
 
     </div>
     <!-- Page wrapper end -->
